@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 let books = require("./booksdb.js");
 const regd_users = express.Router();
-const SECRET_KEY = "fingerprint_customer"; // Replace with a strong secret key
+const SECRET_KEY = "fingerprint_customer";
 
 let users = [];
 
@@ -20,16 +20,16 @@ const authenticatedUser = (username, password) => {
 
 // only registered users can login
 regd_users.post("/login", (req, res) => {
-  //Write your code here
+  // write your code here
   const username = req.body.username;
   const password = req.body.password;
 
-  // Check credentials
+  // check credentials
   if (authenticatedUser(username, password)) {
-    // Generate token
+    // generate token
     const token = jwt.sign({ _id: username }, SECRET_KEY);
 
-    // Store the token in the user's session
+    // store the token in the user's session
     req.session.token = token;
 
     return res
